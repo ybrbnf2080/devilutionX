@@ -116,6 +116,7 @@ int sgnTimeoutCurs;
 clicktype sgbMouseDown;
 int color_cycle_timer;
 uint16_t gnTickDelay = 50;
+int logicTick;
 /** Game options */
 Options sgOptions;
 Keymapper keymapper {
@@ -399,6 +400,9 @@ static void run_game_loop(interface_mode uMsg)
 #ifdef GPERF_HEAP_FIRST_GAME_ITERATION
 	unsigned run_game_iteration = 0;
 #endif
+
+	logicTick = 0;
+
 	while (gbRunGame) {
 		while (FetchMessage(&msg)) {
 			if (msg.message == DVL_WM_QUIT) {
@@ -422,6 +426,7 @@ static void run_game_loop(interface_mode uMsg)
 		game_loop(gbGameLoopStartup);
 		gbGameLoopStartup = false;
 		DrawAndBlit();
+		logicTick++;
 #ifdef GPERF_HEAP_FIRST_GAME_ITERATION
 		if (run_game_iteration++ == 0)
 			HeapProfilerDump("first_game_iteration");
