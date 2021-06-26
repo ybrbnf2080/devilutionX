@@ -2863,7 +2863,7 @@ bool M_RoundWalk(int i, Direction md, int *dir)
 	}
 
 	if (!ok) {
-		// Try 90 degrees in the oposit then desired direction
+		// Try 90 degrees in the opposite than desired direction
 		*dir = (*dir == 0) ? 1 : 0;
 		return M_CallWalk(i, opposite[turn90deg]);
 	}
